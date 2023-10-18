@@ -1,4 +1,5 @@
 
+import "../src/styles/style.scss"
 import './App.css';
 import { Login } from './components/Login';
 import val from './components/Login';
