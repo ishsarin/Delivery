@@ -3,3 +3,35 @@
   margin: auto;
   padding-block: 5rem;
 }
+.trans-message {
+  font-weight: 400;
+}
+.manu-mess {
+  font-weight: 400;
+}
+@media only screen and (max-width: 600px) {
+  .manufacturer {
+    padding-top: 20px;
+  }
+  .form_data {
+    display: block !important;
+    padding-inline: 15px !important;
+  }
+  .mess {
+    width: 100% !important;
+    padding-inline: 10px !important;
+  }
+  .message_manufacturer {
+    display: block !important;
+  }
+  .manu-messages {
+    max-width: 100% !important;
+  }
+  .manu-header {
+    padding: 0px !important;
+  }
+  .login {
+    width: 100%;
+    padding-inline: 10px !important;
+  }
+}

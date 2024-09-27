@@ -14,7 +14,7 @@ export const TransporterMessages = () => {
   const [value, setValue] = useState([]);
   const [messages, setMessages] = useState([]);
   let [message, setMessage] = useState("");
-  const [get,setGet] = useState(false);
+  const [get, setGet] = useState(false);
 
   useEffect(() => {
     socket.on("sent_from_man", (data) => {
@@ -26,7 +26,6 @@ export const TransporterMessages = () => {
       console.log("Message from Man:", message);
       setMessages((oldArray) => [...oldArray, message]);
       setGet(!get);
-      
     });
   }, [socket]);
 
@@ -35,7 +34,7 @@ export const TransporterMessages = () => {
       dbRef,
       (snapshot) => {
         setValue([]);
-        console.log(snapshot)
+        console.log(snapshot);
         const data = snapshot.val();
         console.log(data);
         if (data != null) {
@@ -52,14 +51,14 @@ export const TransporterMessages = () => {
     onValue(
       dbRef3,
       (snapshot) => {
-        setMessages([])
-        console.log(snapshot)
+        setMessages([]);
+        console.log(snapshot);
         const data = snapshot.val();
         console.log(data);
         if (data != null) {
           Object.values(data).map((val) => {
-            if(val.message!==" ")
-            setMessages((oldArray) => [...oldArray, val.message]);
+            if (val.message !== " ")
+              setMessages((oldArray) => [...oldArray, val.message]);
           });
         }
       },
@@ -79,8 +78,7 @@ export const TransporterMessages = () => {
     reply_btn.disabled = true;
   };
 
-
-  const reply_text = async(e) => {
+  const reply_text = async (e) => {
     e.preventDefault();
     const replyText = document.querySelector(".reply-message-text");
     message = replyText.value;
@@ -96,24 +94,24 @@ export const TransporterMessages = () => {
           "Content-Type": "application/json",
         },
         body: JSON.stringify({
-         message,
+          message,
         }),
       }
     );
     // console.log(res);
-      // console.log(res.json());
+    // console.log(res.json());
 
     // console.log(message);
   };
 
   return (
     <>
-      <h1>All Messages from Manufacturer</h1>
+      <h1 className="pt-5">All Messages from Manufacturer</h1>
       <div class="container messages">
         <div class="row">
           {value.map((val) => (
-            <div class="col-3">
-              <ul class="">
+            <div class="col-3 manu-messages">
+              <ul class="manu-header">
                 <li class="list-group-item">
                   {" "}
                   <span className="font-weight-bold">Order ID:</span>{" "}
@@ -147,29 +145,36 @@ export const TransporterMessages = () => {
         </div>
       </div>
 
-      <div className="container p-3"style={{border:get ? "2px solid" : ""}}>
-      <div className="mess"  >
-        {messages.map((mess) => (
-          mess===" " ? 
-          <h6 style={{color:"red"}}>Error!!!! No Text</h6> : 
-          <h6>{mess}</h6>
-        ))}
-      </div>
-      <div className="container p-2 message_manufacturer" hidden>
-        <textarea
-          name="reply"
-          id=""
-          cols="40"
-          rows="3"
-          className="reply-message-text p-2"
-        >
-          {" "}
-        </textarea>
-        <button onClick={reply_text}>Send</button>
-      </div>
-      <button className="btn btn-success reply_btn mt-4" onClick={reply}>
-        Message to the Manufacturer
-      </button>
+      <div className="container p-3" style={{ border: get ? "2px solid" : "" }}>
+        <div className="mess">
+          {messages.map((mess) =>
+            mess === " " ? (
+              <h6 style={{ color: "red" }}>Error!!!! No Text</h6>
+            ) : (
+              <h6>
+                <span>Manufacturer:</span>{" "}
+                <span className="manu-mess">{mess}</span>
+              </h6>
+            )
+          )}
+        </div>
+        <div className="container p-2 message_manufacturer" hidden>
+          <textarea
+            name="reply"
+            id=""
+            cols="40"
+            rows="3"
+            className="reply-message-text p-2"
+          >
+            {" "}
+          </textarea>
+          <button onClick={reply_text} className="btn btn-primary w-50">
+            Send
+          </button>
+        </div>
+        <button className="btn btn-success reply_btn mt-4" onClick={reply}>
+          Message to the Manufacturer
+        </button>
       </div>
     </>
   );

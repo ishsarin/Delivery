@@ -39,17 +39,17 @@ export const Manufacturer = () => {
     navigate("/Manufacturer/message");
   };
 
-  const handleClick = ()=>{
+  const handleClick = () => {
     navigate("/Manufacturer/message");
-  }
+  };
 
   return (
-    <>
+    <div className="manufacturer">
       <h3>Enter the Details</h3>
       <form
         action="/Manufacturer/messages"
         onSubmit={handleSubmit}
-      className="form_data"
+        className="form_data"
         // required
       >
         <div class="form-group row">
@@ -151,7 +151,7 @@ export const Manufacturer = () => {
       <button className="btn btn-danger" onClick={handleClick}>
         Messages
       </button>
-    </>
+    </div>
   );
 };
 // export default value;
